@@ -1,21 +1,19 @@
 <?php
 /**
  * Plugin Name: Swissunihockey Web Components
- * Description: Bindet die Swissunihockey Web Components (Spielpläne, Ranglisten, Topscorer) per Shortcode ein.
+ * Description: Bindet die Swissunihockey Web Components (Spielpläne, Ranglisten, Topscorer) per Shortcode ein. Für die Nutzung ist eine Registrierung bei Swissunihockey Voraussetzung (https://www.swissunihockey.ch/de/administration/services/webmaster/)
  * Version: 1.0.0
  * Requires PHP: 7.4
  * License: GPL-2.0-or-later
  * Text Domain: swissunihockey
+ * Autor: Markus Schenardi (Schenardi Consulting, Leiter Vereinsbüro)
  */
 
 defined( 'ABSPATH' ) || exit;
 
 const SUH_OPTION = 'suh_settings';
-define( 'SUH_DEFAULT_JS', plugins_url( 'swissunihockey-webcomponents.js', __FILE__ ) );
-//const SUH_DEFAULT_JS  = 'https://raw.githubusercontent.com/swissunihockey/swissunihockey-webcomponents/refs/heads/master/swissunihockey-webcomponents.js';
-//const SUH_DEFAULT_CSS = 'swissunihockey-webcomponents.css';
-define( 'SUH_DEFAULT_CSS', plugins_url( 'swissunihockey-webcomponents.css', __FILE__ ) );
-//const SUH_DEFAULT_CSS = 'https://raw.githubusercontent.com/swissunihockey/swissunihockey-webcomponents/refs/heads/master/swissunihockey-webcomponents.css';
+const SUH_DEFAULT_JS  = 'https://cdn.jsdelivr.net/gh/swissunihockey/swissunihockey-webcomponents@master/swissunihockey-webcomponents.js';
+const SUH_DEFAULT_CSS = 'https://cdn.jsdelivr.net/gh/swissunihockey/swissunihockey-webcomponents@master/swissunihockey-webcomponents.css';
 
 function suh_get_settings() {
 	$s = get_option( SUH_OPTION, array() );
@@ -86,7 +84,7 @@ function suh_render_settings() {
 					<td><input id="suh_css" class="large-text" type="url" name="<?php echo esc_attr( SUH_OPTION ); ?>[css_url]" value="<?php echo esc_attr( $s['css_url'] ); ?>"></td></tr>
 				<tr><th><label for="suh_season">Standard-Saison</label></th>
 					<td><input id="suh_season" type="text" pattern="\d{4}" maxlength="4" name="<?php echo esc_attr( SUH_OPTION ); ?>[season]" value="<?php echo esc_attr( $s['season'] ); ?>">
-					<p class="description">Startjahr der Saison. Leer = automatisch (aktuell: <?php echo esc_html( suh_default_season() ); ?>).</p></td></tr>
+					<p class="description">Startjahr der Saison. Leer = automatisch - Wechsel im Juli (aktuell: <?php echo esc_html( suh_default_season() ); ?>).</p></td></tr>
 			</table>
 			<?php submit_button(); ?>
 		</form>
