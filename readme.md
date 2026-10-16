@@ -1,7 +1,9 @@
 # Wordpress Plugin zur Nutzung der Web Components von Swissunihockey
 
 Bindet die Swissunihockey Web Components per Shortcode ein. JS/CSS werden extern (jsDelivr) geladen; URLs unter Einstellungen > Swissunihockey änderbar.
-Quelle https://github.com/swissunihockey/swissunihockey-webcomponents/tree/master
+
+Quelle: https://github.com/swissunihockey/swissunihockey-webcomponents/tree/master
+
 Für die Nutzung ist eine Registrierung bei Swissunihockey notwendig, https://www.swissunihockey.ch/de/administration/services/webmaster/
 
 ## Installation
