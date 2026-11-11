@@ -35,12 +35,12 @@ function suh_default_season() {
 
 function suh_shortcode_defs() {
 	return array(
-		'swissunihockey_league_games'       => array( 'uniho-league-games', array( 'game_class', 'league', 'season', 'group' ) ),
-		'swissunihockey_club_team_games'    => array( 'uniho-club-team-games', array( 'club_id', 'season', 'page_size' ) ),
-		'swissunihockey_team_games'         => array( 'uniho-team-games', array( 'team_id', 'season', 'page_size' ) ),
-		'swissunihockey_club_games'         => array( 'uniho-club-games', array( 'club_id', 'season' ) ),
-		'swissunihockey_ranking'            => array( 'uniho-ranking', array( 'season', 'league', 'game_class', 'group' ) ),
-		'swissunihockey_mobiliar_topscorer' => array( 'uniho-mobiliar-topscorer', array( 'club_id', 'season' ) ),
+		'uniho-league-games'       => array( 'uniho-league-games', array( 'game_class', 'league', 'season', 'group' ) ),
+		'uniho-club-team-games'    => array( 'uniho-club-team-games', array( 'club_id', 'season', 'page_size' ) ),
+		'uniho-team-games'         => array( 'uniho-team-games', array( 'team_id', 'season', 'page_size' ) ),
+		'uniho-club-games'         => array( 'uniho-club-games', array( 'club_id', 'season' ) ),
+		'uniho-ranking'            => array( 'uniho-ranking', array( 'season', 'league', 'game_class', 'group' ) ),
+		'uniho-mobiliar-topscorer' => array( 'uniho-mobiliar-topscorer', array( 'club_id', 'season' ) ),
 	);
 }
 
@@ -95,7 +95,7 @@ function suh_render_settings() {
 				<li><code>[<?php echo esc_html( $tag . ' ' . implode( '="" ', $def[1] ) ); ?>=""]</code></li>
 			<?php endforeach; ?>
 		</ul>
-		<p>Beispiel: <code>[swissunihockey_ranking league="3" game_class="21" group="Gruppe 1"]</code></p>
+		<p>Beispiel: <code>[uniho-ranking league="3" game_class="21" group="Gruppe 1"]</code></p>
 	</div>
 	<?php
 }
