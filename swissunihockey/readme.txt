@@ -1,6 +1,6 @@
 === Swissunihockey Web Components ===
 Requires at least: 5.9
-Tested on: 7.1
+Tested up to: 7.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 
