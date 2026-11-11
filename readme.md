@@ -13,10 +13,13 @@ Für die Nutzung ist eine [Registrierung](https://www.swissunihockey.ch/de/admin
 
 ## Nutzungsbedingungen
 
-Bitte immer die Vorgaben von Swissunihockey beachten. [Registrierung](https://www.swissunihockey.ch/de/administration/services/webmaster/) ist obligatorisch.
-Dieses Plugin kann von allen Vereinen frei genutzt werden. 
-Feedbacks oder auch Pullrequest gerne via Github.
+* Bitte immer die Vorgaben von Swissunihockey beachten. [Registrierung](https://www.swissunihockey.ch/de/administration/services/webmaster/) ist obligatorisch.
+* Dieses Plugin kann von allen Vereinen frei genutzt werden. 
+* Feedbacks oder auch Pullrequest gerne via Github.
+* Erstellt mit KI - ich bin kein PHP Entwickler. Getestet mit Wordpress 7.
+* Natürlich übernehme ich keine Garantie, dass irgendwas funktioniert... 
 
-Erstellt mit KI - ich bin kein PHP Entwickler. Getestet mit Wordpress 7.
-
-Ich bin Markus Schenardi. Selbständiger Berater für Geo-IT mit [Schenardi Consulting](https://schenardi.github.io/), Leiter [Vereinsbüro](https://vereinsbuero.ch) (die Geschäftsstelle für Vereine), Präsident von [Floorball Zurich Lioness](https://lioness.ch).
+Ich bin Markus Schenardi. 
+* Selbständiger Berater für Geo-IT mit [Schenardi Consulting](https://schenardi.github.io/)
+* Leiter [Vereinsbüro](https://vereinsbuero.ch) (die Geschäftsstelle für Vereine)
+* Präsident von [Floorball Zurich Lioness](https://lioness.ch)
