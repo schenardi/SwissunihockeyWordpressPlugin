@@ -33,17 +33,6 @@ function suh_default_season() {
 	return (string) ( (int) wp_date( 'n' ) < 7 ? $year - 1 : $year );
 }
 
-function suh_shortcode_defs() {
-	return array(
-		'uniho-league-games'       => array( 'uniho-league-games', array( 'game_class', 'league', 'season', 'group' ) ),
-		'uniho-club-team-games'    => array( 'uniho-club-team-games', array( 'club_id', 'season', 'page_size' ) ),
-		'uniho-team-games'         => array( 'uniho-team-games', array( 'team_id', 'season', 'page_size' ) ),
-		'uniho-club-games'         => array( 'uniho-club-games', array( 'club_id', 'season' ) ),
-		'uniho-ranking'            => array( 'uniho-ranking', array( 'season', 'league', 'game_class', 'group' ) ),
-		'uniho-mobiliar-topscorer' => array( 'uniho-mobiliar-topscorer', array( 'club_id', 'season' ) ),
-	);
-}
-
 /* ---------- Settings ---------- */
 
 add_action( 'admin_menu', function () {
@@ -88,14 +77,10 @@ function suh_render_settings() {
 			</table>
 			<?php submit_button(); ?>
 		</form>
-		<h2>Shortcodes</h2>
+		<h2>Shortcode</h2>
 		<p>IDs finden: <a href="https://www.swissunihockey.ch/de/administration/services/vereins-ids-finder-fuer-web-component/" target="_blank" rel="noopener">Vereins-IDs-Finder</a></p>
-		<ul>
-			<?php foreach ( suh_shortcode_defs() as $tag => $def ) : ?>
-				<li><code>[<?php echo esc_html( $tag . ' ' . implode( '="" ', $def[1] ) ); ?>=""]</code></li>
-			<?php endforeach; ?>
-		</ul>
-		<p>Beispiel: <code>[uniho-ranking league="3" game_class="21" group="Gruppe 1"]</code></p>
+		<p>Syntax: <code>[swissunihockey component="web-component-name" attribute="value"]</code></p>
+		<p>Beispiel: <code>[swissunihockey component="uniho-ranking" league="3" game_class="21" group="Gruppe 1"]</code></p>
 	</div>
 	<?php
 }
@@ -117,21 +102,29 @@ add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
 
 /* ---------- Shortcodes ---------- */
 
-foreach ( suh_shortcode_defs() as $suh_tag => $suh_def ) {
-	add_shortcode( $suh_tag, function ( $atts ) use ( $suh_def ) {
-		list( $element, $keys ) = $suh_def;
-		$atts = shortcode_atts( array_fill_keys( $keys, '' ), $atts );
-		if ( in_array( 'season', $keys, true ) && ! preg_match( '/^\d{4}$/', (string) $atts['season'] ) ) {
-			$atts['season'] = suh_default_season();
+add_shortcode( 'swissunihockey', function ( $atts ) {
+	$atts = is_array( $atts ) ? $atts : array();
+	$component = isset( $atts['component'] ) && is_scalar( $atts['component'] )
+		? strtolower( trim( (string) $atts['component'] ) )
+		: '';
+
+	if ( ! preg_match( '/^[a-z][a-z0-9._-]*-[a-z0-9._-]+$/', $component ) ) {
+		return '';
+	}
+
+	unset( $atts['component'] );
+	$season = isset( $atts['season'] ) && is_scalar( $atts['season'] ) ? (string) $atts['season'] : '';
+	if ( ! preg_match( '/^\d{4}$/', $season ) ) {
+		$atts['season'] = suh_default_season();
+	}
+
+	suh_enqueue_assets();
+	$attrs = '';
+	foreach ( $atts as $key => $value ) {
+		if ( ! preg_match( '/^[a-zA-Z_:][a-zA-Z0-9:._-]*$/', $key ) || ! is_scalar( $value ) || '' === (string) $value ) {
+			continue;
 		}
-		suh_enqueue_assets();
-		$attrs = '';
-		foreach ( $atts as $key => $value ) {
-			if ( '' === $value ) {
-				continue;
-			}
-			$attrs .= ' ' . str_replace( '_', '-', $key ) . '="' . esc_attr( $value ) . '"';
-		}
-		return '<' . $element . $attrs . '></' . $element . '>';
-	} );
-}
+		$attrs .= ' ' . str_replace( '_', '-', $key ) . '="' . esc_attr( $value ) . '"';
+	}
+	return '<' . $component . $attrs . '></' . $component . '>';
+} );
